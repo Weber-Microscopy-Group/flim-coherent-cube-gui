@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "flim-coherent-cube-gui"
+dynamic = ["version"]
+description = 'GUI control for a Coherent Cube laser, specifically for the fd-FLIM setup at ipv, Uni. Stuttgart'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [{ name = "Brian Carlsen", email = "carlsen.bri@gmail.com" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["coherent-cube"]
+
+[project.urls]
+Documentation = "https://github.com/Brian Carlsen/flim-coherent-cube-gui#readme"
+Issues = "https://github.com/Brian Carlsen/flim-coherent-cube-gui/issues"
+Source = "https://github.com/Brian Carlsen/flim-coherent-cube-gui"
+
+[tool.hatch.version]
+path = "src/flim_coherent_cube_gui/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = ["mypy>=1.0.0"]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/flim_coherent_cube_gui tests}"
+
+[tool.coverage.run]
+source_pkgs = ["flim_coherent_cube_gui", "tests"]
+branch = true
+parallel = true
+omit = ["src/flim_coherent_cube_gui/__about__.py"]
+
+[tool.coverage.paths]
+flim_coherent_cube_gui = [
+  "src/flim_coherent_cube_gui",
+  "*/flim-coherent-cube-gui/src/flim_coherent_cube_gui",
+]
+tests = ["tests", "*/flim-coherent-cube-gui/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
